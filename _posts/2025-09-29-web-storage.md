@@ -9,7 +9,7 @@ date: 2025-09-29
 
 ## 웹 스토리지
 웹 스토리지는 웹사이트가 쿠키의 단점을 보완하며 등장한, 브라우저 내부에 데이터를 저장하는 매커니즘이다.
-Wikipedia에서는 웹 스토리지가 쿠키보다 큰 저장 공간을 제공하고, HTTP 헤더에 포함되지 않는다는 장점으로 소개되고 있는데 이 두 가지 특성부터 살펴보겠다.
+[Wikipedia](https://en.wikipedia.org/wiki/Web_storage)에서는 웹 스토리지가 쿠키보다 큰 저장 공간을 제공하고, HTTP 헤더에 포함되지 않는다는 장점으로 소개되고 있는데 이 두 가지 특성부터 살펴보겠다.
 
 ### 1. 공간
 쿠키는 아주 작은 데이터 저장소로, 보통 브라우저마다 약 4KB 수준으로 제한돼있다.
@@ -90,4 +90,4 @@ console.log(preference);
 5. 웹 스토리지는 편리하지만 보안에 취약하므로 민감한 정보 저장은 피해야 한다.
 <br><br><br>
 
-*(출처: [Wikipedia](https://en.wikipedia.org/wiki/Web_storage), FESI 11기 강의자료)*
+*(출처: [Wikipedia](https://en.wikipedia.org/wiki/Web_storage), 코드잇 FESI 11기 강의자료)*
