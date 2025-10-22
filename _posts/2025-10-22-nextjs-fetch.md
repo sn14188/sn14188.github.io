@@ -45,6 +45,7 @@ fetch(`https://...`, { cache: 'force-cache' | 'no-store' })
 ```
 - `cache: 'no-store'`: 항상 원본을 호출하며 Data Cache를 사용하지 않습니다
 - `cache: 'force-cache'`: Data Cache를 조회하고 적용하며, 없거나 만료면 원본에서 가져오고 캐시를 업데이트합니다
+
 <br>
 
 `options.next.revalidate`: 리소스의 캐시 수명을 설정할 수 있습니다
@@ -82,6 +83,7 @@ export default async function Page() {
 - 위 예시처럼 라우트 기본 `revalidate`보다 더 낮은 값을 개별 `fetch()`에 지정하면 해당 라우트 전체의 재검증 주기가 그 값으로 단축됩니다
 - 같은 라우터 안에서 같은 URL에 서로 다른 값을 쓰면 더 낮은 값이 적용됩니다
 - `{ revalidate: 3600, cache: 'no-store' }` 같은 충돌 옵션이 있으면 둘 다 무시됩니다
+
 <br>
 
 `options.next.tags`: 리소스의 캐시 태그를 구성합니다
@@ -105,6 +107,7 @@ export default async function Page() {
   )
 }
 ```
+
 ```
 'use server'
 
