@@ -39,7 +39,6 @@ Next.js의 캐싱 메커니즘과 목적에 대한 간략한 개요는 다음과
 
 <img src='/images/caching-overview.avif' width="800">
 
-<br>
 
 ## fetch
 모든 데이터 요청은 웹 표준 API인 `fetch`를 기반으로 이뤄집니다. Next.js는 서버에서 실행되는 `fetch`에 Data Cache 기능을 연결해 옵션으로 캐시 전략을 선언할 수 있게 했습니다.
