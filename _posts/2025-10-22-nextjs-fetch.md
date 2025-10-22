@@ -1,5 +1,5 @@
 ---
-title: "Next.js fetch의 데이터 캐싱과 재검증"
+title: "Next.js fetch와 Data Cache"
 date: 2025-10-22
 ---
 Next.js는 표준 Web API `fetch`에 프레임워크 수준의 캐시와 재검증을 더해, 간단하게 정책을 선언할 수 있게 했습니다.
