@@ -139,7 +139,7 @@ export async function publishPost(formData: FormData) {
   revalidateTag('blog')
 }
 ```
-<br><br><br>
+<br><br>
 
 *출처:<br>
 [1] Next.js 공식 문서 (["Caching in Next.js"](https://nextjs.org/docs/app/guides/caching), ["fetch"](https://nextjs.org/docs/app/api-reference/functions/fetch))<br>
