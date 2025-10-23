@@ -48,7 +48,7 @@ Next.js의 캐싱 메커니즘과 목적에 대한 간략한 개요는 다음과
 - App Router 초창기: 서버 `fetch`가 Data Cache와 기본 연동되는 상황이 많았음
 - Next.js 14-15 (최근 버전): 기본적으로 `fetch` 응답이 자동 캐시되지 않음
   - 정적 렌더링 시 결과가 캐시에 저장될 수 있음
-  - 동적 렌더링 시 매 요청 패치
+  - 동적 렌더링 시 매 요청 `fetch`
  
 ### 기본 동작: `auto no cache`
   - 개발 환경에서는 매 리퀘스트마다 네트워크로 다시 가져옵니다
@@ -57,7 +57,7 @@ Next.js의 캐싱 메커니즘과 목적에 대한 간략한 개요는 다음과
 
 ### fetch 옵션별 작동 정리
 `options.cache`: 리퀘스트가 Data Cache와 상호작용하는 방식을 구성합니다
-```
+```TypeScript
 fetch(`https://...`, { cache: 'force-cache' | 'no-store' })
 ```
 - `cache: 'no-store'`: 항상 원본을 호출하며 Data Cache를 사용하지 않습니다
