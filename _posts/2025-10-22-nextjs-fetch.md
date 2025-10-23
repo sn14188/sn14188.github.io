@@ -66,7 +66,7 @@ fetch(`https://...`, { cache: 'force-cache' | 'no-store' })
 <br>
 
 `options.next.revalidate`: 리소스의 캐시 수명을 설정할 수 있습니다
-```
+```ts
 fetch(`https://...`, { next: { revalidate: false | 0 | number } })
 ```
 - `false`: 사실상 무기한인 캐시입니다 (공간 정책으로 관리됩니다)
@@ -79,7 +79,7 @@ fetch(`https://...`, { next: { revalidate: false | 0 | number } })
   4. Next.js는 캐시된 데이터를 보여주는 한편, 시간이 경과했으므로 백그라운드에서 다시 데이터를 불러옵니다
   5. 4번의 작업이 성공적으로 끝나면 캐시된 데이터를 갱신하고, 그렇지 않다면 과거 데이터를 보여줍니다
 
-```
+```ts
 export const revalidate = 3600
 
 export default async function Page() {
@@ -104,14 +104,14 @@ export default async function Page() {
 <br>
 
 `options.next.tags`: 리소스의 캐시 태그를 구성합니다
-```
+```ts
 fetch(`https://...`, { next: { tags: ['collection'] } })
 ```
 - 핸들러에서 `revalidateTag`를 써서 연관 데이터를 일괄적으로 무효화할 수 있습니다
 - 태그의 최대 길이는 256자이고 최대 태그 항목 수는 128개입니다
 
 
-```
+```ts
 export default async function Page() {
   const res = await fetch('https://api.vercel.app/blog', {
     next: { revalidate: 60, tags: ['blog']},
@@ -127,7 +127,7 @@ export default async function Page() {
 }
 ```
 
-```
+```ts
 'use server'
 
 import { revalidateTag } from 'next/cache'
