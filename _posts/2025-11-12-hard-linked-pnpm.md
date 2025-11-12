@@ -1,5 +1,5 @@
 ---
-title: "Hardlinked pnpm"
+title: "Hard-linked pnpm"
 date: 2025-11-12
 ---
 pnpm이 하드/심볼릭 링크를 사용한다고 알려져 있고, 아마 `pnpm add axios`처럼 커맨드가 자동으로 하드 링크가 적용된다고 생각하는 분들도 있을 것 같습니다.<br>
