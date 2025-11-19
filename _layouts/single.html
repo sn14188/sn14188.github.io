@@ -39,7 +39,23 @@ layout: default
         {% elsif page.venue and page.date %}
           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.date %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+          <p class="page__date" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+            <span>
+              <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 
+                {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}
+              </strong>
+              <time datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}
+              </time>
+            </span>
+          
+            {% if page.collection == "posts" %}
+            <span style="font-size:0.9em; color:#555;">
+              Today: <span id="busuanzi_value_page_uv"></span>
+              · Total: <span id="busuanzi_value_page_pv"></span>
+            </span>
+            {% endif %}
+          </p>
         {% endif %}    
         </header>
       {% endunless %}
