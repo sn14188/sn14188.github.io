@@ -11,8 +11,8 @@ locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
 title                    : Aiden's Homepage # "Your Name / Site Title"
 title_separator          : "-"
-name                     : &name "Your Name"
-description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
+name                     : &name "Aiden Seo"
+description              : &description "Aiden's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://sn14188.github.io
 baseurl                  : ""
 repository               : "academicpages/academicpages.github.io"
