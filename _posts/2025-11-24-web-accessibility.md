@@ -23,8 +23,21 @@ date: 2025-11-24
 W3C는 월드 와이드 웹 컨소시엄(World Wide Web Consortium)의 약자로, 웹 기술 표준을 만드는 국제 비영리 기관입니다.
 
 ### WAI
-WAI는 웹 접근성 이니셔티브(Web Accessibility Initiative)의 약자로, W3C 안에서 웹 접근성을 담당하는 조직·프로그램입니다. 접근성 연구, 교육, 정책, 리소스 제공, 표준 개발을 담당합니다.
+WAI는 Web Accessibility Initiative의 약자로, W3C 안에서 웹 접근성을 담당하는 조직·프로그램입니다. 접근성 연구, 교육, 정책, 리소스 제공, 표준 개발을 담당합니다.
+
+## Accessibility Standards
+아래 표준들은 모두 WAI가 만든 웹 접근성 관련 가이드라인입니다.
 
 ### WCAG
-WCAG는 웹 콘텐츠 접근성 지침(Web Content Accessibility Guidelines)의 약자로, WAI가 만든 표준입니다.
-웹사이트와 디지털 콘텐츠가 누구에게나 접근 가능하도록 하기 위한 기준을 제공합니다.
+WCAG는 웹 콘텐츠 접근성 지침(Web Content Accessibility Guidelines)의 약자로, 웹사이트와 디지털 콘텐츠가 누구에게나 접근 가능하도록 하기 위한 기준을 제공합니다.<br>
+이 가이드라인은 다음 네 가지 핵심 원칙을 기반으로 합니다:
+- 인지 가능(Perceivable): 사람들이 콘텐츠를 보거나 들을 수 있어야 합니다
+- 작동 가능(Operable): 사람들이 인터페이스를 조작할 수 있어야 합니다
+- 이해 가능(Understandable): 콘텐츠와 사용 방법이 이해 가능해야 합니다
+- 견고함(Robust): 다양한 사용자 도구와 보조 기술에서 동작해야 합니다
+
+### ATAG
+ATAG는 Authoring Tool Accessibility Guidelines의 약자로, 콘텐츠 제작 도구가 접근성을 지원하도록 요구사항을 정의합니다. 예를 들어 코드 관리 시스템, 코드 편집기 등이 있습니다.
+
+### UAAG
+UAAG는 User Agent Accessibility Guidelines의 약자로, 웹 브라우저와 미디어 플레이어 등 사용자 에이전트의 접근성 요구사항을 정의합니다.
