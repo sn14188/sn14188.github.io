@@ -108,7 +108,7 @@ Quick Reference 페이지에서 `1.1.1 Non-text Content` 항목을 펼쳐보면,
 <img src='/images/web-accessibility/techniques.png' width="800">
 <img src='/images/web-accessibility/techniques-page.png' width="800">
 
-연결된 Techniques 페이지에서 다음 내용들을 확인할 수 있습니다:
+[연결된 Techniques 페이지](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA6)에서 다음 내용들을 확인할 수 있습니다:
 - 이 기술이 어떤 성공 기준에 대응하는지
 - 이 기술이 (`aria-label` 속성) 어떤 목적으로 사용되는지, 어떤 상황에서 써야 하는지
 - HTML/ARIA 구현 예시
@@ -116,7 +116,7 @@ Quick Reference 페이지에서 `1.1.1 Non-text Content` 항목을 펼쳐보면,
 그런데 보통 이미지에 `alt`를 사용하지 않나요?<br><br>
 기술 목록을 조금 더 살펴보니, 이미지에 텍스트 대체를 제공하는 방법으로 "H37: Using alt attributes on img elements"가 포함되어 있었습니다!<br>
 
-살펴보니 이미지 접근성의 우선 적용 원칙은 `alt` 속성을 사용하는 것임을 다시 확인할 수 있었고,
+[연결된 Techniques 페이지](https://www.w3.org/WAI/WCAG22/Techniques/html/H37)를 살펴보니 이미지 접근성의 우선 적용 원칙은 `alt` 속성을 사용하는 것임을 다시 확인할 수 있었고,
 ARIA6는 `alt`만으로 충분하지 않은 상황에서 보조 기술을 위한 이름(name)을 제공하기 위한 보조적 접근 방식이라는 점도 이해할 수 있었습니다.<br>
 
 이를 통해 단순히 "이미지에 `alt`를 넣어야 한다"는 원칙을 넘어, 충분하지 않은 예외 상황에서 ARIA 속성을 어떻게 활용해야 하는지까지 구체적으로 파악할 수 있게 됐습니다.
