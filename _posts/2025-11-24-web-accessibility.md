@@ -11,7 +11,7 @@ date: 2025-11-24
 예를 들어, 팔을 자유롭게 쓰지 못하는 사람은 마우스 스틱을 사용해 타이핑할 수 있습니다.
 청각이 불편한 사용자는 영상의 자막을 통해 정보를 얻을 수 있고,
 시력이 좋지 않은 사용자는 Screen Reader로 화면의 내용을 음성으로 들을 수 있습니다.
-- Screen Reader: 텍스트와 이미지 콘텐츠를 음성이나 점자 출력으로 렌더링하는 기술의 한 형태입니다
+- Screen Reader: 텍스트와 이미지 콘텐츠를 음성이나 점자로 출력하는 기술의 한 형태입니다
 
 ### Benefits
 - 자막은 시끄러운 환경이나 조용해야 하는 환경 등 모든 사용자에게 유용합니다
@@ -119,4 +119,14 @@ Screen Reader는 이 이미지를 건너뛸 수 있습니다.
 <img src='/images/web-accessibility/techniques-h37.png' width="800">
 
 [페이지](https://www.w3.org/WAI/WCAG22/Techniques/html/H37)의 내용을 통해 이미지 접근성의 우선 적용 원칙은 `alt` 속성을 사용하는 것임을 다시 확인할 수 있었고,
-ARIA6는 `alt`만으로 충분하지 않은 상황에서 보조 기술을 위한 이름(name)을 제공하기 위한 보조적 접근 방식이라는 점도 구체적으로 이해할 수 있었습니다.<br>
+ARIA6는 `alt`만으로 충분하지 않은 상황에서 보조 기술을 위한 이름(name)을 제공하기 위한 보조적 접근 방식이라는 점도 구체적으로 이해할 수 있었습니다.
+
+## Takeaways
+1. 웹 접근성은 장애 유무와 관계없이 모두가 웹을 동등하게 이용할 수 있도록 하는 핵심 개념이다
+2. 웹 접근성 표준은 W3C/WAI에서 개발하며, WCAG가 가장 널리 쓰인다
+<br><br>
+
+*출처:<br>
+[1] [W3C Web Accessibility Initiative](https://www.w3.org/WAI/)<br>
+[2] Wikipedia (["Web accessibility"](https://en.wikipedia.org/wiki/Web_accessibility), ["Web Content Accessibility Guidelines"](https://en.wikipedia.org/wiki/Web_Content_Accessibility_Guidelines), ["Screen reader"](https://en.wikipedia.org/wiki/Screen_reader))<br>
+[3] MDN Docs (["Accessibility tree"](https://developer.mozilla.org/en-US/docs/Glossary/Accessibility_tree))<br>*
