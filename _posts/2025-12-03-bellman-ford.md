@@ -12,3 +12,9 @@ date: 2025-12-03
 - 가중치: 각 간선에 부여된 값으로, 해당 간선을 따라 이동할 때의 비용을 뜻합니다
 
 동일한 문제에 대해 다익스트라 알고리즘보다 느리지만 일부 가중치가 음수인 그래프를 처리할 수 있으므로 더 일반적이라고 할 수 있다.
+
+<br><br>
+
+*출처:<br>
+[1] Wikipedia (["
+Bellman–Ford algorithm"](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm))<br>*
