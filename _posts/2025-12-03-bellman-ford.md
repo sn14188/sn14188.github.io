@@ -48,7 +48,7 @@ relaxation에 비용을 비교하고 더 작은 값으로 업데이트하는 과
 ### 그렇다면 얼마나 반복해야 하는가
 벨만-포드 알고리즘은 한 번의 반복에서 최소 비용의 정보를 간선 한 단계만큼 전파할 수 있습니다. 시작 정점에서 직접 연결된 정점들은 첫 반복에서 갱신되지만, 두 개 이상의 간선을 거쳐 도달하는 정점들은 여러 번의 반복을 거쳐야 최소 비용이 반영될 수 있습니다.<br>
 위 예시에서 `A`에서 `X`까지의 최소 비용의 경로는 `A -> C -> D -> X`으로 세 개의 간선으로 구성됩니다. 비효율적인 순서의 간선에서 첫 반복에서는 `C`만 갱신되고, 두 번째 반복에서야 `D`가 갱신되며, 세 번째 반복에서 비로소 `X`가 최단 거리 3으로 갱신됩니다.<br>
-이처럼 최단 경로의 앞부분이 늦게 등장하면 한 번의 반복으로는 전체 경로를 반영할 수 없으며, 벨만-포드 알고리즘이 $$|V|−1$$번의 반복을 수행하는 이유가 여기에 있습니다.
+이처럼 최단 경로의 앞부분이 늦게 등장하면 한 번의 반복으로는 전체 경로를 반영할 수 없으며, 벨만-포드 알고리즘이 `|V|−1`번의 반복을 수행하는 이유가 여기에 있습니다.
 
 ## Implementation
 [Baekjoon Online Judge](https://www.acmicpc.net/problem/11657)에 있는 문제를 살짝 변형해 단순하게 만들어봤습니다.<br>
@@ -88,7 +88,7 @@ def solution(info: list[str], start: str) -> list[int]:
     return answer
 ```
 
-모든 간선에 대해 $$|V|-1$$번 relaxation을 수행합니다.
+모든 간선에 대해 `|V|-1`번 relaxation을 수행합니다.
 ```py
 import math
 
@@ -149,14 +149,14 @@ def solution(info: list[str], start: str) -> list[int]:
 
     return answer
 ```
-이 구현은 모든 간선에 대해 $$|V|−1$$번 relaxation을 수행하므로 시간 복잡도는 $$O(VE)$$입니다.  
+이 구현은 모든 간선에 대해 `|V|−1`번 relaxation을 수행하므로 시간 복잡도는 $$O(VE)$$입니다.  
 
 ## Takeaways
 1. 벨만-포드 알고리즘은 음의 비용인 간선이 포함된 그래프에서도 올바르게 최소 비용 경로를 구할 수 있다
-2. relaxation은 한 번의 반복에서 경로를 한 단계씩만 확장하기 때문에, 최대 $$|V|-1$$번 반복이 필요하다
+2. relaxation은 한 번의 반복에서 경로를 한 단계씩만 확장하기 때문에, 최대 `|V|-1`번 반복이 필요하다
 3. 알고리즘의 시간 복잡도는 $$O(VE)$$이다
 <br><br>
 
 *출처:<br>
 [1] Wikipedia (["
-Bellman–Ford algorithm"](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)))<br>*
+Bellman–Ford algorithm"](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm))<br>*
