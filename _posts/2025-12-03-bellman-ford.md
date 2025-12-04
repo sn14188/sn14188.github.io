@@ -37,13 +37,13 @@ if dist[C] > dist[B] + w:
 이 경우에 `dist[C]`가 10, `dist[B]`가 3, `w`가 5라면 `dist[C]`는 10에서 8로 갱신됩니다. 벨만-포드 알고리즘에서는 이 과정을 모든 간선에 대해 수행합니다.<br>
 알고리즘 구현에서는 시작 정점의 비용을 0으로, 다른 정점들까지의 비용을 무한대로 초기화합니다. 그러면 시작 정점의 실제 값을 바탕으로 연결된 정점들의 비용이 유한한 값으로 갱신되기 시작하고, 이후 반복을 통해 더 먼 정점들까지 갱신이 확장됩니다.<br>
 
-(image)<br>
+<img src='/images/bellman-ford/happy.png' width="800">
 
 ### 1회 Relaxation으로 충분하지 않은 이유
 Relaxation에 비용을 비교하고 더 작은 값으로 업데이트하는 과정이 포함돼있어서, 처음에는 1회 Relaxation으로도 최단 경로를 구할 수 있지 않을까 생각했습니다.<br>
 하지만 그래프의 구조나 간선의 순서를 알 수 없으며, 최단 경로를 이루는 간선들이 반드시 순서대로 등장하는 것도 아니기 때문에 여러 차례 반복이 필요합니다.<br>
 
-(image)<br>
+<img src='/images/bellman-ford/sad.png' width="800">
 
 ### 그렇다면 얼마나 반복해야 하는가
 벨만-포드 알고리즘은 한 번의 반복에서 최소 비용의 정보를 간선 한 단계만큼 전파할 수 있습니다. 시작 정점에서 직접 연결된 정점들은 첫 반복에서 갱신되지만, 두 개 이상의 간선을 거쳐 도달하는 정점들은 여러 번의 반복을 거쳐야 최소 비용이 반영될 수 있습니다.<br>
@@ -54,4 +54,4 @@ Relaxation에 비용을 비교하고 더 작은 값으로 업데이트하는 과
 
 *출처:<br>
 [1] Wikipedia (["
-Bellman–Ford algorithm"](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm), ["Relaxation (iterative method)"](https://en.wikipedia.org/wiki/Relaxation_(iterative_method)))<br>*
+Bellman–Ford algorithm"](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)))<br>*
