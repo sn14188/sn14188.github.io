@@ -149,10 +149,12 @@ def solution(info: list[str], start: str) -> list[int]:
 
     return answer
 ```
+이 구현은 모든 간선에 대해 $$|V|−1$$번 relaxation을 수행하므로 시간 복잡도는 $$O(VE)$$입니다.  
 
 ## Takeaways
 1. 벨만-포드 알고리즘은 음의 비용인 간선이 포함된 그래프에서도 올바르게 최소 비용 경로를 구할 수 있다
 2. relaxation은 한 번의 반복에서 경로를 한 단계씩만 확장하기 때문에, 최대 $$|V|-1$$번 반복이 필요하다
+3. 알고리즘의 시간 복잡도는 $$O(VE)$$이다
 <br><br>
 
 *출처:<br>
