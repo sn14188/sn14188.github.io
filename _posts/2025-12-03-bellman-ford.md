@@ -29,7 +29,7 @@ B ---w---> C
 - `dist[B]`: `A`에서 `B`까지의 최소 비용 거리
 - `dist[C]`: `A`에서 `C`까지의 최소 비용 거리
 
-Relaxation은 다음을 확인합니다:
+relaxation은 다음을 확인합니다:
 ```py
 if dist[C] > dist[B] + w:
     dist[C] = dist[B] + w
@@ -40,7 +40,7 @@ if dist[C] > dist[B] + w:
 <img src='/images/bellman-ford/happy.png' width="800">
 
 ### 1회 Relaxation으로 충분하지 않은 이유
-relaxation에 비용을 비교하고 더 작은 값으로 업데이트하는 과정이 포함돼있어서, 처음에는 1회 relaxation으로도 최단 경로를 구할 수 있지 않을까 생각했습니다.<br>
+relaxation에 비용을 비교하고 더 작은 값으로 업데이트하는 과정이 포함돼있어서, 처음에는 위 경우처럼 1회 relaxation으로도 최단 경로를 구할 수 있지 않을까 생각했습니다.<br>
 하지만 그래프의 구조나 간선의 순서를 알 수 없으며, 최단 경로를 이루는 간선들이 반드시 순서대로 등장하는 것도 아니기 때문에 여러 차례 반복이 필요합니다.<br><br>
 
 <img src='/images/bellman-ford/sad.png' width="800">
