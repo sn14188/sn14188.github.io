@@ -86,7 +86,7 @@ function foo() {
   }
 }
 ```
-lexical 구조에서 중요한 것은, `bar` 함수가 어디에서 호출되는지가 아니라 어디에 정의되어 있는지입니다.
+lexical 구조에서 중요한 것은, `bar` 함수가 어디에서 호출되는지가 아니라 어디에 정의되어 있는지입니다. 스코프가 코드가 작성된 위치를 기준으로 결정되기 때문입니다.
 
 ### Environment Record과 Outer Lexical Environment Reference
 Lexical Environment는 내부적으로 Environment Record를 가집니다. Environment Record는 현재 스코프에 선언된 식별자들의 매핑 테이블입니다.<br>
