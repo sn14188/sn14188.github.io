@@ -120,7 +120,28 @@ function foo() {
 - 초기값은 `undefined`입니다
 
 ### this 바인딩
-this는 실행 컨텍스트의 ThisBinding 슬롯에 저장되며, 이 값은 실행 컨텍스트가 생성될 때 결정됩니다.
+this는 실행 컨텍스트의 ThisBinding 슬롯에 저장되며, 이 값은 실행 컨텍스트가 생성될 때 결정됩니다.<br>
+this 값은 변수처럼 선언되는 것이 아니라 샐행 컨텍스트가 생성되는 시점에 결정되며 함수가 어떻게 호출되었는지에 따라 달라집니다.
+
+```js
+function foo() {
+  console.log(this);
+}
+
+foo();
+```
+위 코드에서 `foo`는 일반 함수로 호출됐기 때문에 기본적으로 전역 객체(`window`), strict mode에서는 `undefined`가 `this`로 바인딩됩니다.
+```js
+const obj = {
+  value: 10,
+  foo() {
+    console.log(this.value);
+  }
+};
+
+obj.foo();
+```
+이 경우 `foo`는 객체의 메서드로 호출됐기 때문에 `this`는 해당 객체인 `obj`를 가리킵니다.
 
 ### 실행 단계
 실행 단계에서는 코드가 위에서 아래로 실제로 실행됩니다. 구체적으로 변수에 값을 할당하고, 함수를 호출하며, 표현식을 평가합니다.<br>
