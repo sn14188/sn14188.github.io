@@ -76,7 +76,7 @@ Execution Context
 이 단계에서는 실행 컨텍스트에 `LexicalEnvironment`와 `VariableEnvironment`에 대한 참조가 설정되며, 이에 대응하는 환경 레코드가 생성되고, this 값이 결정됩니다.
 
 ### Lexical Environment
-식별자와 실제 변수 또는 함수를 코드의 렉시컬 구조를 기준으로 연결해주는 개념입니다.
+렉시컬 환경은 식별자와 실제 변수 또는 함수를 코드의 렉시컬 구조를 기준으로 연결해주는 개념입니다.
 
 ```js
 function foo() {
@@ -87,7 +87,7 @@ function foo() {
   }
 }
 ```
-렉시컬 구조에서 중요한 것은, `bar` 함수가 어디에서 호출되는지가 아니라 어디에 정의되어 있는지입니다. 스코프가 코드가 작성된 위치를 기준으로 결정되기 때문입니다.
+이 구조에서 중요한 것은, `bar` 함수가 어디에서 호출되는지가 아니라 어디에 정의되어 있는지입니다. 스코프가 코드가 작성된 위치를 기준으로 결정되기 때문입니다.
 
 ### Environment Record & Outer Lexical Environment Reference
 렉시컬 환경은 내부적으로 환경 레코드를 가집니다. 환경 레코드는 현재 스코프에 선언된 식별자들의 매핑 테이블입니다.<br>
@@ -98,7 +98,7 @@ foo Environment Record
  └─ bar -> function bar
 ```
 
-`foo`의 렉시컬 환경은 전역 렉시컬 환경을 외부 렉시컬 환경 참조로 (Outer Lexical Environment Reference) 가집니다.<br>
+`foo`의 렉시컬 환경은 전역 렉시컬 환경을 외부 렉시컬 환경 참조로 가집니다.<br>
 <br>
 
 한편 `bar` 함수 내부에서 `x`를 참조할 때의 탐색 순서는 다음과 같습니다.
