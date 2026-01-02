@@ -76,7 +76,7 @@ Execution Context
 이 단계에서는 실행 컨텍스트에 `LexicalEnvironment`와 `VariableEnvironment`에 대한 참조가 설정되며, 이에 대응하는 Environment Record가 생성되고, this 값이 결정됩니다.
 
 ### Lexical Environment
-Lexical Environment 식별자와 실제 변수 또는 함수를 코드의 lexical 구조를 기준으로 연결해주는 개념입니다.
+식별자와 실제 변수 또는 함수를 코드의 lexical 구조를 기준으로 연결해주는 개념입니다.
 
 ```js
 function foo() {
@@ -98,7 +98,7 @@ foo Environment Record
  └─ bar -> function bar
 ```
 
-foo의 Lexical Environment는 전역 Lexical Environment를 Outer Lexical Environment Reference로 참조합니다.<br>
+`foo`의 Lexical Environment는 전역 Lexical Environment를 Outer Lexical Environment Reference로 참조합니다.<br>
 <br>
 
 한편 `bar` 함수 내부에서 `x`를 참조할 때의 탐색 순서는 다음과 같습니다.
