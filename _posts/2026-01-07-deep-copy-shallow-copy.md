@@ -177,6 +177,91 @@ object_2.nested.value = 8;
 console.log(object_1.nested.value); // 42
 ```
 
+### 성능 비교
+JSON 기반 방식, Lodash, `structuredClone`을 기준으로 실행 시간 관점에서 간단한 비교를 진행했습니다.<br>
+테스트는 depth 3 & breadth 3의 중첩 객체를 만들어 진행했으며, 충분한 워밍업 이후 10개 라운드에 걸쳐 실행 시간을 측정했고 평균을 계산했습니다.
+```js
+import { performance } from "node:perf_hooks";
+import lodash from "lodash";
+
+const { cloneDeep } = lodash;
+
+const OBJECT_DEPTH = 3;
+const OBJECT_BREADTH = 3;
+const WARMUP_ROUNDS = 2;
+const ROUNDS = 10;
+const ITERATIONS = 10000;
+
+const createObject = (depth, breadth) => {
+  if (depth === 0) return 42;
+
+  const obj = {};
+  for (let i = 0; i < breadth; i++) {
+    obj[`key_${i}`] = createObject(depth - 1, breadth);
+  }
+
+  return obj;
+};
+
+const average = (arr) => arr.reduce((sum, v) => sum + v, 0) / arr.length;
+
+const runBenchmark = (name, task) => {
+  const durations = [];
+
+  for (let r = 0; r < WARMUP_ROUNDS; r++) {
+    for (let i = 0; i < ITERATIONS; i++) task();
+  }
+
+  for (let r = 0; r < ROUNDS; r++) {
+    const start = performance.now();
+
+    for (let i = 0; i < ITERATIONS; i++) task();
+
+    const duration = performance.now() - start;
+    durations.push(duration);
+  }
+
+  const avg = average(durations);
+
+  console.log(name);
+  console.log(`- average: ${avg.toFixed(2)}ms`);
+  console.log(`- rounds : [${durations.map((d) => d.toFixed(2)).join(", ")}]`);
+  console.log("");
+};
+
+const testObject = createObject(OBJECT_DEPTH, OBJECT_BREADTH);
+
+runBenchmark("JSON.parse(JSON.stringify(object))", () => {
+  JSON.parse(JSON.stringify(testObject));
+});
+
+runBenchmark("lodash.cloneDeep", () => {
+  cloneDeep(testObject);
+});
+
+runBenchmark("structuredClone(object)", () => {
+  structuredClone(testObject);
+});
+```
+실행 결과 JSON 기반 방식과 Lodash는 비슷한 수준의 실행 시간을 보였고, 반면 `structuredClone`은 동일한 조건에서 상대적으로 더 긴 시간이 소요되었습니다.
+
+```text
+JSON.parse(JSON.stringify(object))
+- average: 26.03ms
+- rounds : [25.60, 25.57, 25.34, 25.52, 26.16, 26.12, 25.33, 26.96, 26.76, 26.89]
+
+lodash.cloneDeep
+- average: 29.76ms
+- rounds : [29.18, 29.23, 29.05, 29.86, 30.59, 29.21, 29.48, 30.36, 30.44, 30.19]
+
+structuredClone(object)
+- average: 51.12ms
+- rounds : [51.52, 51.44, 53.26, 51.90, 50.81, 49.85, 50.44, 49.77, 51.11, 51.06]
+```
+
+다만 실제 앱에서 다루는 객체는 훨씬 복잡하고 포함하는 데이터 타입도 다양합니다. 깊은 복사 방식마다 지원하는 데이터 타입에 제약이 있고, 외부 라이브러리에 대한 의존성이 필요한 경우도 있습니다.<br>
+이러한 이유로 깊은 복사 방식은 시간 비교는 물론 다뤄야 할 데이터 타입과 필요한 안정성 수준을 기준으로 선택하는 것이 적절할 거라 생각합니다.
+
 ## Takeaways
 1. 자바스크립트에서 복사 문제는 원시값이 아니라 객체의 참조 방식에서 발생한다
 2. 얕은 복사는 1 depth까지만 안전하며, 중첩된 참조를 포함하는 객체에서는 의도치 않은 변경을 유발할 수 있다
