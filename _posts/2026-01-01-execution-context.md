@@ -112,7 +112,7 @@ let x = 10;
 ```text
 Global Lexical Environment
  ├─ Environment Record
- │   └─ a -> <uninitialized>
+ │   └─ x -> <uninitialized>
  └─ Outer Lexical Environment Reference -> null
 ```
 
