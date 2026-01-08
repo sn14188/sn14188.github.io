@@ -101,6 +101,21 @@ foo Environment Record
 `foo`의 렉시컬 환경은 전역 렉시컬 환경을 외부 렉시컬 환경 참조로 가집니다.<br>
 <br>
 
+### Temporal Dead Zone (TDZ)
+`let`과 `const`로 선언된 변수는 실행 컨텍스트 생성 단계에서 렉시컬 환경의 환경 레코드에 등록되지만, 초기화되기 전까지는 `uninitialized` 상태로 유지됩니다.<br>
+이처럼 식별자는 존재하지만 값이 할당되지 않아 접근할 수 없는 구간을 Temporal Dead Zone이라고 부릅니다.
+```js
+console.log(x); // ReferenceError
+let x = 10;
+```
+
+```text
+Global Lexical Environment
+ ├─ Environment Record
+ │   └─ a -> <uninitialized>
+ └─ Outer Lexical Environment Reference -> null
+```
+
 한편 `bar` 함수 내부에서 `x`를 참조할 때의 탐색 순서는 다음과 같습니다.
 1. `bar`의 환경 레코드에서 `x`를 찾습니다
 2. 없으면 외부 렉시컬 환경 참조를 따라 이동합니다
