@@ -2,6 +2,7 @@
 title: "Prototype"
 date: 2026-01-21
 ---
+자바스크립트의 상속은 프로토타입 체인을 통해 이루어집니다. 이번 포스트에서 프로토타입의 관련 개념과 동작 원리, 그리고 프로토타입 체인이 실제로 어떻게 탐색되는지 살펴봤습니다.
 <br><br>
 
 ## 프로토타입
@@ -120,7 +121,6 @@ const aiden = new Person("Aiden");
 
 ### 구조
 여기서 `new Person("Aiden")`이 실행되면, `aiden` 객체는 다음과 같은 구조를 갖게 됩니다.
-
 ```txt
 aiden
 └─ [[Prototype]] -> Person.prototype
