@@ -101,7 +101,7 @@ console.log(aiden.__proto__ === Person.prototype); // true
 객체에서 특정 프로퍼티나 메서드를 찾을 때, 자신의 객체 -> 부모 객체 -> 그 부모의 부모 객체로 연결된 프로토타입을 따라 순차적으로 탐색하는 구조를 말합니다.<br>
 자바스크립트의 객체는 단독으로 존재하지 않고, 항상 다른 객체를 가리키는 `[[Prototype]]` 링크를 가집니다. 이 링크가 연속적으로 이어져 있는 구조이기 때문에
 이를 프로토타입 체인이라고 부릅니다.<br>
-아래 코드를 기준으로 프로토타입 체인이 어떻게 동작하는지 살펴보겠습니다.
+아래 코드를 바탕으로 프로토타입 체인이 어떻게 동작하는지 살펴보겠습니다.
 ```js
 function Person(name) {
   this.name = name;
@@ -120,6 +120,7 @@ const aiden = new Person("Aiden");
 
 ### 구조
 여기서 `new Person("Aiden")`이 실행되면, `aiden` 객체는 다음과 같은 구조를 갖게 됩니다.
+
 ```txt
 aiden
 └─ [[Prototype]] -> Person.prototype
@@ -160,7 +161,7 @@ console.log(aiden.__proto__.__proto__ === Object.prototype) // ?
 ```
 
 ```js
-const object = { value: 42 }
+const object = { value: 42 };
 
 console.log(object.__proto__ === Object.prototype) // ?
 ```
@@ -179,7 +180,7 @@ console.log((123).toFixed(2));      // 123.00
 console.log(true.toString());       // true
 ```
 
-메서드 접근이 필요할 때 잠깐 객체처럼 만들어주는 메커니즘 때문에 아래와 같은 체인이 성립합니다.
+메서드 접근이 필요할 때 잠깐 객체처럼 만들어주기 때문에 아래와 같은 체인이 성립합니다.
 ```js
 console.log("Aiden".__proto__ === String.prototype); // true
 console.log((123).__proto__ === Number.prototype);   // true
@@ -196,9 +197,9 @@ console.log(string.__proto__.__proto__ === Object.prototype); // true
 ```
 
 ## Takeaways
-1. 프로토타입은 객체들이 속성과 메서드를 공유하기 위해 참조하는 상위 객체입니다.
-2. 자바스크립트에서 상속은 프로토타입을 통한 참조로 이루어집니다. (클래스 기반 언어에서 메서드는 클래스 정의에 속합니다)
-3. 프로토타입 체인은 객체가 프로퍼티를 찾기 위해 `[[Prototype]]` 링크를 따라 상위 객체로 탐색해 나가는 구조입니다.
+1. 프로토타입은 객체들이 속성과 메서드를 공유하기 위해 참조하는 상위 객체입니다
+2. 자바스크립트에서 상속은 프로토타입을 통한 참조로 이루어집니다 (클래스 기반 언어에서 메서드는 클래스 정의에 속합니다)
+3. 프로토타입 체인은 객체가 프로퍼티를 찾기 위해 `[[Prototype]]` 링크를 따라 상위 객체로 탐색해 나가는 구조입니다
 <br><br>
 
 *출처:<br>
