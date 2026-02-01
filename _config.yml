@@ -25,7 +25,7 @@ repository: "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar: "profile.png"
-  name: "Aiden Seo"
+  name: "Woongduk (Aiden) Seo"
   pronouns: # example: "she/her"
   bio: "Software Engineer"
   location: "Seoul, South Korea"
@@ -57,7 +57,7 @@ author:
 
   # Social media
   artstation: # Username
-  bluesky: "bsky.app" # Replace this with you Bluesky username
+  # bluesky: "bsky.app" # Replace this with you Bluesky username
   facebook: # Username
   flickr: # Username
   foursquare: # Username
