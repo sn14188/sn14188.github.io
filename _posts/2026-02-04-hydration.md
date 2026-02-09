@@ -120,9 +120,9 @@ hydration 이슈는 서버에서 렌더링해 전달한 HTML과, 클라이언트
 3. hydration 이슈는 브라우저에 존재하는 DOM과 hydration 시점에 컴포넌트 트리와 일치하지 않을 때 발생합니다
    <br><br>
 
-*출처:<br>
+_출처:<br>
 [1] [코드잇 FE 위클리 페이퍼](https://codeit.notion.site/Next-js-SSR-hydration-1506fd228e8d817b93d7e771ad97b125)<br>
-[2] Wikipedia (["Hydration (web development)"](https://en.wikipedia.org/wiki/Hydration_(web_development)))<br>
+[2] Wikipedia (["Hydration (web development)"](<https://en.wikipedia.org/wiki/Hydration_(web*development)>))<br>
 [3] 리액트 공식 문서 (["hydrateRoot"](https://react.dev/reference/react-dom/client/hydrateRoot))<br>
 [4] Next.js 공식 문서 (["Text content does not match server-rendered HTML
 "](https://nextjs.org/docs/messages/react-hydration-error))*
