@@ -1,7 +1,7 @@
 ---
 title: "Claude Code CLI로 멀티 에이전트 봇 만들기"
 date: 2026-06-09
-published: false
+# published: false
 ---
 
 이번 포스트에서는 멀티 에이전트 패턴을 익히기 위해 GeekNews 새 글을 Discord에 자동 포스팅하는 봇을 만들어봤습니다.
@@ -96,7 +96,7 @@ https://news.hada.io/rss/news 를 가져와서 파싱한 뒤,
   - `Read`, `Glob`, `Grep`만 허용해서 코드를 직접 수정하지 못하도록 제한했습니다
   - 그런데 이 프로젝트에서는 실제 코드를 작성하지 않기 때문에 사용할 일이 없었습니다
 
-## CLAUDE.md 작성
+## `CLAUDE.md` 작성
 
 `CLAUDE.md`는 프로젝트 루트에 두는 파일로, Claude Code가 세션을 시작할 때마다 자동으로 로드합니다. 프로젝트 배경, 실행 규칙, 주의사항 등을 여기에 써두면 매번 다시 설명하지 않아도 됩니다.<br>
 CI는 매 실행마다 새 세션으로 시작하기 때문에 Claude는 이전 실행의 내용을 알지 못합니다. `CLAUDE.md`에 실행 순서를 명시해 어떤 환경에서 실행되든 동일한 규칙을 따르도록 했습니다.
@@ -131,6 +131,45 @@ CI는 매 실행마다 새 세션으로 시작하기 때문에 Claude는 이전 
 - `git diff --staged --quiet || git commit`:
   - 스테이징된 변경사항이 없으면 커밋을 건너뜁니다
   - 없는 경우에도 커밋하면 빈 커밋이 계속 쌓이기 때문입니다
+
+## Refactoring
+
+멀티 에이전트 패턴을 익히는 것이 목적이었지만, 실제로 테스트해보니 이 프로젝트에 LLM이 필요가 없다는 것을 확인했습니다.<br>
+RSS 파싱 -> 신규 글 필터링 -> Discord 포스팅의 각 단계가 완전히 결정론적입니다. 입력이 같으면 출력도 항상 같아야 하는 작업이라 LLM의 판단이 필요하지 않았고, 오히려 Claude를 거치면 API 비용이 발생하고 실행 시간도 길어졌습니다.<br>
+
+그래서 `main.py` 하나로 리팩터링했습니다!
+
+```python
+HTTP_TOO_MANY_REQUESTS = 429
+
+def fetch_feed():
+    response = requests.get(FEED_URL, timeout=5)
+    response.raise_for_status()
+    return ET.fromstring(response.content)
+
+def post_to_discord(title, link):
+    webhook_url = os.environ["DISCORD_WEBHOOK_URL"]
+    while True:
+        response = requests.post(webhook_url, json={"content": f"[{title}]({link})"}, timeout=5)
+        if response.status_code == HTTP_TOO_MANY_REQUESTS:
+            try:
+                retry_after = float(response.json().get("retry_after", 1))
+            except Exception:
+                retry_after = 1
+            time.sleep(max(retry_after, 0))
+            continue
+        response.raise_for_status()
+        break
+```
+
+- RSS 피드 요청과 XML 파싱은 표준 라이브러리(`xml.etree.ElementTree`)와 `requests`로 충분했습니다
+- Claude Code CLI 설치 단계와 `ANTHROPIC_API_KEY` 시크릿이 불필요해졌고, 의존성도 `requests` 하나로 줄었습니다
+- GitHub Actions 스케줄도 1시간에서 5분으로 줄여 새 글이 올라오는 즉시 포스팅되도록 했습니다
+
+![Discord 포스팅 결과](/assets/img/discord-bot-result.png)
+
+멀티 에이전트는 단계마다 인간의 판단이 필요하거나, 맥락에 따라 도구를 동적으로 선택해야 할 때 진가를 발휘합니다.
+이 봇처럼 파이프라인이 고정적이고 각 단계의 로직이 명확하다면, 단순한 스크립트가 더 효율적임을 배울 수 있었습니다.
 <br><br>
 
 _출처:<br>
