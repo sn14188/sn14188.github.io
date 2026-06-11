@@ -96,6 +96,18 @@ https://news.hada.io/rss/news 를 가져와서 파싱한 뒤,
   - `Read`, `Glob`, `Grep`만 허용해서 코드를 직접 수정하지 못하도록 제한했습니다
   - 그런데 이 프로젝트에서는 실제 코드를 작성하지 않기 때문에 사용할 일이 없었습니다
 
+## 데이터 흐름
+
+### 에이전트 선택 전략
+
+- 오케스트레이터는 현재 작업과 각 에이전트의 `description`을 비교해서 가장 적합한 에이전트를 선택합니다
+- 그래서 `description`에는 "어떤 상황에서 이 에이전트를 써야 하는가"를 명확히 적어두어야 합니다
+
+### 데이터 파이프라인
+
+- 오케스트레이터가 중간에서 모든 데이터를 받아 다음 에이전트에게 전달합니다 (에이전트끼리 직접 통신하지 않습니다)
+- `news-fetcher`가 JSON 배열을 반환하면, 오케스트레이터가 `seen_ids.txt`와 비교해 필터링한 뒤 `discord-poster`에게 넘기는 식입니다
+
 ## `CLAUDE.md` 작성
 
 `CLAUDE.md`는 프로젝트 루트에 두는 파일로, Claude Code가 세션을 시작할 때마다 자동으로 로드합니다. 프로젝트 배경, 실행 규칙, 주의사항 등을 여기에 써두면 매번 다시 설명하지 않아도 됩니다.<br>
@@ -173,4 +185,5 @@ def post_to_discord(title, link):
 <br><br>
 
 _출처:<br>
-[1] Harvard Berkman Klein Center (["RSS 2.0 Specification"](https://cyber.harvard.edu/rss/rss.html))<br>_
+[1] Harvard Berkman Klein Center (["RSS 2.0 Specification"](https://cyber.harvard.edu/rss/rss.html))<br>
+[2] [Multi-Agents](https://app.notion.com/p/Multi-Agents-369dca3cd725807a97a1e96ea41c36e7)<br>_
