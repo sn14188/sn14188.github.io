@@ -10,7 +10,7 @@ date: 2026-06-24
 
 HTTP에서 데이터를 조회할 때는 `GET`을 사용합니다. `GET`에 조회 조건을 포함하려면 아래와 같이 URL에 담을 수 있습니다.
 
-```
+```http
 GET /search?q=hello&category=tech&sort=date&order=desc&page=1&size=20&lang=ko&from=2024-01-01&to=2024-12-31&author=서웅덕
 ```
 
@@ -39,7 +39,7 @@ GET /search?q=hello&category=tech&sort=date&order=desc&page=1&size=20&lang=ko&fr
 `POST`는 URL 대신 요청 본문에 조건을 담기 때문에 `GET`의 한계를 피할 수 있습니다.<br>
 대표적인 사례로 Elasticsearch가 있습니다. 검색 조건을 JSON으로 표현하는 특성상 구조가 복잡해져 URL에 담을 수 없어, 처음부터 `POST`와 JSON body 방식을 채택했습니다.
 
-```
+```http
 POST /search
 {
   "query": {
@@ -73,7 +73,7 @@ POST /search
 - 안전: 서버 상태를 변경하지 않기 때문에 부작용이 없습니다
 - 멱등: 같은 요청을 여러 번 보내도 서버 상태가 동일하게 유지됩니다
 
-```
+```http
 QUERY /search
 Content-Type: application/json
 
