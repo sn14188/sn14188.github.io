@@ -95,6 +95,8 @@ Content-Type: application/json
 }
 ```
 
+이때 `must`, `filter`, `bool` 같은 필드는 `QUERY`가 정의한 게 아니라 Elasticsearch가 자체적으로 정한 Query DSL입니다. `QUERY`는 본문을 가질 수 있다는 것과 안전·멱등 시맨틱만 규정할 뿐, 본문의 구조는 `POST`와 마찬가지로 전적으로 API가 정합니다.
+
 위 두 가지 특성 덕분에 `QUERY`는 `GET`과 `POST` 모두가 가지지 못했던 것들을 동시에 갖습니다. 요청 본문에 복잡한 조건을 담으면서도, 응답을 캐싱할 수 있고 네트워크 오류 시 자동으로 재시도할 수 있습니다.
 
 ## `QUERY` 동작 방식
@@ -107,6 +109,26 @@ Content-Type: application/json
 - `415 Unsupported Media Type`: 서버가 해당 `Content-Type`을 지원하지 않는 경우
 - `400 Bad Request`: 본문 형식이 잘못된 경우
 - `422 Unprocessable Content`: 형식은 맞지만 처리할 수 없는 내용인 경우
+
+### 쿼리스트링과 바디 병행
+
+`QUERY`가 본문을 쓴다고 해서 URL의 쿼리스트링을 포기해야 하는 것은 아닙니다. target URI의 쿼리 부분은 여전히 리소스를 식별하는 데 관여하기 때문에 본문과 함께 사용할 수 있습니다.
+
+```http
+QUERY /search?category=tech&sort=date&page=1
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [{ "match": { "title": "hello" } }],
+      "filter": [{ "term": { "author": "서웅덕" } }]
+    }
+  }
+}
+```
+
+이 방식을 활용하면 사용자가 보거나 공유하길 원할 만한 단순 조건은 URL에 남기고, 복잡하거나 노출하고 싶지 않은 조건만 본문으로 옮길 수 있습니다. `GET`과 `POST`/`QUERY` 중 하나를 전부 선택하는 대신, 조건별로 URL 노출 여부를 정할 수 있는 셈입니다.
 
 ### 캐싱
 
@@ -122,7 +144,7 @@ Content-Type: application/json
 
 `QUERY`는 메서드 자체가 이 목록에 없기 때문에 조건 불문 항상 preflight가 발생합니다.<br>
 preflight는 `OPTIONS` 메서드로 서버에 해당 메서드를 허용하는지 먼저 확인하는 요청입니다. 서버가 허용한다고 응답하면 그때 실제 `QUERY` 요청을 보냅니다. 결과적으로 요청이 두 번 오가게 됩니다.<br>
-따라서 `QUERY`를 쓰려면 서버의 CORS 설정에서 `QUERY` 메서드를 명시적으로 허용해야 합니다.
+따라서 `QUERY`를 쓰려면 서버의 CORS 설정에서 `QUERY` 메서드를 명시적으로 허용해야 합니다. CORS 설정 외에도 `QUERY`는 등장한 지 얼마 되지 않은 메서드라 요청이 지나가는 모든 구간이 (서버 런타임, 웹 프레임워크의 라우팅, 중간 프록시나 API 게이트웨이) 이를 지원하는지 별도로 확인해야 합니다.
 
 ## Takeaways
 
