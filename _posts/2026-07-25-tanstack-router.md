@@ -6,6 +6,8 @@ date: 2026-07-25
 TanStack Router를 프로젝트에 써보긴 했는데 왜 좋은지 명확히 설명하기는 어려워서, 개념과 실제로 장점이 무엇인지 이번 기회에 정리해봤습니다.
 <br><br>
 
+<img src='/images/tanstack-router/tanstack-router.jpg' width="800">
+
 ## React Router
 
 React Router는 URL 경로와 컴포넌트를 매핑해 화면을 전환해주는 라우팅 라이브러리입니다. React 생태계에서 가장 오래되고 가장 널리 쓰이는 라우터로, SPA를 만들 때 사실상 기본 선택지라 할 수 있습니다.<br>
