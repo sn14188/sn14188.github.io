@@ -8,15 +8,22 @@ TanStack Router를 프로젝트에 써보긴 했는데 왜 좋은지 명확히 �
 
 ## React Router
 
-React Router는 URL 경로와 컴포넌트를 매핑해서 화면을 전환해주는 클라이언트 사이드 라우팅 라이브러리입니다. React 생태계에서 가장 오래되고 가장 널리 쓰이는 라우터로, SPA를 만들 때 사실상 기본 선택지입니다.<br>
-일반적인 `<a href="/posts">` 링크를 클릭하면 브라우저는 서버에 새 HTML 문서를 요청합니다. 그 과정에서 현재 실행 중이던 JavaScript 컨텍스트가 통째로 사라지고 React 앱이 처음부터 다시 마운트되며, 번들도 다시 다운로드해서 파싱하고, 그 사이 입력 중이던 폼 값이나 열려있던 모달 같은 상태도 전부 초기화됩니다. 화면이 깜빡이는 게 바로 이 풀 페이지 리로드입니다.<br>
-React Router의 `<Link>` 컴포넌트는 겉보기엔 `<a>`처럼 생겼지만 클릭 시 `event.preventDefault()`로 이 기본 동작을 가로챕니다. 대신 `history.pushState()`로 주소창의 URL만 바꾸고, 그 변화를 감지해서 현재 실행 중인 React 앱 안에서 컴포넌트만 교체해 다시 렌더링합니다. 브라우저 입장에서는 페이지가 이동한 것처럼 보이지만 실제로는 JS 실행 환경과 앱 상태를 유지한 채 필요한 부분만 다시 그리는 것입니다.
+React Router는 URL 경로와 컴포넌트를 매핑해 화면을 전환해주는 라우팅 라이브러리입니다. React 생태계에서 가장 오래되고 가장 널리 쓰이는 라우터로, SPA를 만들 때 사실상 기본 선택지라 할 수 있습니다.<br>
+일반적인 `<a href="/posts">` 링크를 클릭하면 브라우저는 서버에 새 HTML 문서를 요청하고, 페이지가 리로드되는 과정은 다음과 같습니다.
 
-### 직접 구현해보기
+- 현재 실행 중이던 JavaScript 컨텍스트가 통째로 사라지고 React 앱이 처음부터 다시 마운트됩니다
+- 번들도 다시 다운로드해 파싱합니다
+- 입력 중이던 폼 값이나 열려있던 모달 같은 상태도 전부 초기화됩니다
+
+React Router의 `<Link>` 컴포넌트는 겉보기엔 `<a>`처럼 생겼지만 클릭 시 `event.preventDefault()`로 이 기본 동작을 가로챕니다. 대신 `history.pushState()`로 주소창의 URL만 바꾸고, 그 변화를 감지해서 현재 실행 중인 React 앱 안에서 컴포넌트만 교체해 다시 렌더링합니다.<br>
+브라우저 입장에서는 페이지가 이동한 것처럼 보이지만 실제로는 JS 실행 환경과 앱 상태를 유지한 채 필요한 부분만 다시 그리는 것입니다.
+
+### 직접 구현의 한계
 
 로직을 직접 구현하면 다음과 같습니다.
 
 ```tsx
+// src/useRoute.ts
 import { useEffect, useState } from 'react'
 
 function useRoute() {
@@ -40,16 +47,18 @@ function useRoute() {
 이 훅을 실제로 쓰는 쪽은 다음처럼 됩니다.
 
 ```tsx
+// src/App.tsx
 function App() {
   const { path } = useRoute()
 
   if (path === '/posts') return <PostListPage />
   if (path.startsWith('/posts/')) return <PostPage id={path.split('/')[2]} />
+
   return <HomePage />
 }
 ```
 
-문제는 라우트가 몇 개만 늘어나도 이런 단순 분기로는 감당이 안 되는 지점들이 나온다는 점입니다.
+문제는 라우트가 몇 개만 늘어나도 이런 단순 분기로는 감당이 안 되는 지점들이 나온다는 것입니다.
 
 - 매칭 우선순위:
   - `path.startsWith('/posts/')` 하나로 `/posts/new`, `/posts/123`, `/posts/123/edit`이 전부 걸립니다
@@ -80,6 +89,7 @@ React Router의 주요 기능은 다음과 같습니다.
   - `loader`를 라우트 정의에 붙이면 라우트가 매칭되는 즉시 페칭이 시작되고, 컴포넌트는 `useLoaderData()`로 이미 준비된 값을 바로 사용합니다
 
 ```tsx
+// src/main.tsx
 import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -122,9 +132,9 @@ function App() {
 
 요즘 Next.js가 많이 쓰이지만 React Router의 입지가 좁은 건 아닙니다.
 
-- SPA 영역:
+- SPA:
   - SSR·SEO가 필요하지 않은 사내 어드민, 대시보드, 브라우저 확장 프로그램에서는 여전히 Vite와 React Router (또는 TanStack Router) 조합이 기본값입니다
-- 프레임워크 영역:
+- 프레임워크:
   - 2024년 React Router v7이 Remix의 프레임워크 기능을 (SSR, Vite 기반 번들링 등) 흡수했습니다
   - Next.js와 경쟁하는 프레임워크 레벨 포지션에도 들어와있습니다
 
