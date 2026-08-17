@@ -6,6 +6,8 @@ date: 2026-08-17
 Google과 Anthropic 모두 AI로 생성한 텍스트에 워터마킹을 적용하고 있는데, 정확히 어떤 원리로 동작하는지 궁금해서 알아봤습니다.
 <br><br>
 
+<img src='/images/ai-text-watermarking/ai-text-watermarking.jpg' width="800">
+
 AI를 통해 생성한 텍스트를 가려내는 방법은 크게 2가지입니다.<br>
 통계 기반 탐지는 GPTZero처럼 이미 완성되어 있는 텍스트를 대상으로 그 안에 담긴 통계적 지문을 분석해서 AI가 썼을 확률을 추정하는 방식이고, 워터마킹은 텍스트가 만들어지는 순간에 눈에 보이지 않는 표식을 심어두는 방식입니다.
 
